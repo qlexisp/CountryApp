@@ -9,13 +9,40 @@
 </head>
 
 <body>
-    <header class="flex justify-between items-center my-[6%]">
+
+    <header class="flex justify-between items-center py-[10%]">
         <div class="font-bold ml-[5%]">Where in the world?</div>
-        <div class="mr-[5%]">Dark Mode</div>
+        <div class="mr-[5%] flex items-center justify-center">
+            <img class="mx-2" alt="Logo du darkmode" src="assets/img/darkmode.png">
+            <h1 class="font-semibold text-sm">Dark Mode</h1>
+        </div>
     </header>
-    <div class="bg-gray-100">
-        ok 
+
+    <div class="bg-[#FAFAFA] w-full"> <!-- conteneur de page -->
+        <div class="flex justify-center"> <!-- conteneur de la search bar -->
+            <div class="m-[2%] flex my-6 w-full max-w-[90%]">
+                <label for="site-search" class="sr-only">Search for a country</label>
+                <div class="relative flex items-center w-full">
+                    <div class="w-full">
+                        <input type="search" id="site-search" name="site-search" placeholder="Search for a country..."
+                            class="shadow-md px-10 py-[5%] rounded text-sm w-full">
+                        <img src="assets/img/search.png"
+                            class="absolute left-3 top-[50%] transform -translate-y-1/2 w-4 h-4">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="my-6 flex"> <!-- conteneur du filtre -->
+            <a href="#filters" class="bg-white rounded ml-[5%] py-4 pl-6 pr-4 text-sm flex items-center shadow-md">
+                Filter by Region
+                <img class="ml-12" src="assets/img/Arrow.png" alt="Arrow">
+            </a>
+        </div>
+        
+    <footer>ok</footer>
     </div>
+
     <script src="assets/script.js"></script>
 </body>
 
