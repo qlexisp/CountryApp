@@ -10,7 +10,7 @@
 
 <body>
 
-    <header class="flex justify-between items-center py-[10%]">
+    <header class="flex justify-between items-center py-[10%]"> <!-- header -->
         <div class="font-bold ml-[5%]">Where in the world?</div>
         <div class="mr-[5%] flex items-center justify-center">
             <img class="mx-2" alt="Logo du darkmode" src="assets/img/darkmode.png">
@@ -19,12 +19,13 @@
     </header>
 
     <div class="bg-[#FAFAFA] w-full"> <!-- conteneur de page -->
-        <div class="flex justify-center"> <!-- conteneur de la search bar -->
+        <div class="flex justify-center"> <!-- search bar -->
             <div class="m-[2%] flex my-6 w-full max-w-[90%]">
                 <label for="site-search" class="sr-only">Search for a country</label>
                 <div class="relative flex items-center w-full">
                     <div class="w-full">
-                        <input type="search" id="websiteSearch" name="websiteSearch" placeholder="Search for a country..."
+                        <input type="search" id="websiteSearch" name="websiteSearch"
+                            placeholder="Search for a country..."
                             class="shadow-md px-10 py-[5%] rounded text-sm w-full">
                         <img src="assets/img/search.png"
                             class="absolute left-3 top-[50%] transform -translate-y-1/2 w-4 h-4">
@@ -33,7 +34,7 @@
             </div>
         </div>
 
-        <div class="flex flex-col"> <!-- conteneur du filtre -->
+        <div class="flex flex-col"> <!-- filtre -->
             <div class="w-[50%] flex bg-white rounded ml-[5%] py-4 pl-6 text-sm items-center shadow-md" id="onClick">
                 <a href="#filter" class="flex">
                     Filter by Region
@@ -43,19 +44,25 @@
 
             <div class="bg-white flex flex-col ml-[5%] mt-[2%] rounded pl-6 py-4 w-[50%] shadow-md hidden" id="menu">
                 <a href="#africa" class="text-sm mb-[3%]">Africa</a>
-                    <a href="#america" class="text-sm mb-[3%]">America</a>
-                        <a href="#asia" class="text-sm mb-[3%]">Asia</a>
-                            <a href="#europe" class="text-sm mb-[3%]">Europe</a>
-                                <a href="#ocean" class="text-sm mb-[3%]">Oceania</a>
-                                    </ul>
+                <a href="#america" class="text-sm mb-[3%]">America</a>
+                <a href="#asia" class="text-sm mb-[3%]">Asia</a>
+                <a href="#europe" class="text-sm mb-[3%]">Europe</a>
+                <a href="#ocean" class="text-sm mb-[3%]">Oceania</a>
             </div>
         </div>
 
+        <main> <!-- main-->
+            <div class="" id="showCountries">
 
-        <footer>ok</footer>
+            </div>
+        </main>
 
-        <script src="assets/toggle.js"></script>
-        <script src="assets/api.js"></script>
+    </div>
+
+    <footer class="mt-8 text-center text-sm">...</footer>
+
+    <script src="assets/toggle.js"></script>
+    <script src="assets/api.js"></script>
 </body>
 
 </html>
