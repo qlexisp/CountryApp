@@ -1,8 +1,8 @@
-// addEventListener de la search bar
-document.getElementById('websiteSearch').addEventListener('keyup', e => {
+document.getElementById('websiteSearch').addEventListener('keyup', e => { // addEventListener de la search bar
     if (e.code === "Enter") {
         let country = document.getElementById('websiteSearch').value;
         showCountries(country);
+        getCountries(country);
     }
 });
 
@@ -14,13 +14,19 @@ async function getCountries(country) { // Récupération des informations
 
         if (response) {
             const countryInfos = response[0];
-            // console.log(countryInfos.flags.svg);
+            console.log(countryInfos.name.nativeName);
             return {
                 flag: countryInfos.flags.svg,
                 name: countryInfos.name.common,
+                nativeName: countryInfos.name.nativeName, // pas sûr
                 population: countryInfos.population,
-                region: countryInfos.continents[0],
-                capital: countryInfos.capital
+                region: countryInfos.region,
+                subregion: countryInfos.subregion,
+                capital: countryInfos.capital,
+                tld: countryInfos.tld,
+                currencies: countryInfos.currencies, // pas sûr
+                languages: countryInfos.languages,
+                borders: countryInfos.borders // pas sûr
             };
         }
         else {
@@ -34,12 +40,12 @@ async function getCountries(country) { // Récupération des informations
     }
 }
 
-async function showCountries(country) {
+async function showCountries(country) { // Affichage des données récupérées
     const showCountriesInfos = await getCountries(country);
     if (showCountriesInfos) {
         document.getElementById('showCountries').innerHTML = `
-        <div class="bg-white my-8 w-[80%] mx-8 shadow-md rounded-md">
-        <img class="mb-6" src="${showCountriesInfos.flag}">
+        <div class="bg-white my-8 w-[80%] shadow-md rounded-md">
+        <img class="mb-6 rounded-t-lg" src="${showCountriesInfos.flag}">
         <div class="pl-6 pb-12">
         <p class="font-bold text-lg mb-4">${showCountriesInfos.name}</p>
         <p class="text-sm"><span class="font-semibold">Population:</span> ${showCountriesInfos.population}</p>
