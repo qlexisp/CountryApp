@@ -33,17 +33,28 @@
             </div>
         </div>
 
-        <div class="my-6 flex"> <!-- conteneur du filtre -->
-            <a href="#filters" class="bg-white rounded ml-[5%] py-4 pl-6 pr-4 text-sm flex items-center shadow-md">
-                Filter by Region
-                <img class="ml-12" src="assets/img/Arrow.png" alt="Arrow">
-            </a>
-        </div>
-        
-    <footer>ok</footer>
-    </div>
+        <div class="flex flex-col"> <!-- conteneur du filtre -->
+            <div class="w-[50%] flex bg-white rounded ml-[5%] py-4 pl-6 text-sm items-center shadow-md" id="onClick">
+                <a href="#filter" class="flex">
+                    Filter by Region
+                    <img class="justify-end ml-10" src="assets/img/Arrow.png" alt="Arrow">
+                </a>
+            </div>
 
-    <script src="assets/script.js"></script>
+            <div class="bg-white flex flex-col ml-[5%] mt-[2%] rounded pl-6 py-4 w-[50%] shadow-md hidden" id="menu">
+                <a href="#africa" class="text-sm mb-[3%]">Africa</a>
+                    <a href="#america" class="text-sm mb-[3%]">America</a>
+                        <a href="#asia" class="text-sm mb-[3%]">Asia</a>
+                            <a href="#europe" class="text-sm mb-[3%]">Europe</a>
+                                <a href="#ocean" class="text-sm mb-[3%]">Oceania</a>
+                                    </ul>
+            </div>
+        </div>
+
+
+        <footer>ok</footer>
+
+        <script src="assets/script.js"></script>
 </body>
 
 </html>
