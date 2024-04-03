@@ -121,13 +121,12 @@ async function countryPreview(country) { // Affichage preview des données récu
 }
 
 let responseHomePage;
-async function getCountriesHomepage() { // Récupération des informations pour la homepage
+async function getCountriesHomePage() { // Récupération des informations pour la homepage
     let url = "https://restcountries.com/v3.1/all";
     try {
         const call = await fetch(url);
         const response = await call.json();
-        responseHomePage = response.length;
-
+        responseHomePage = response;
         if (response) {
             return response;
         }
@@ -142,19 +141,25 @@ async function getCountriesHomepage() { // Récupération des informations pour 
     }
 }
 
-async function getCountriesHomePageView() { // Affichage des informations pour la homepage
-    const countries = await getCountriesHomepage(); {
-        if (countries) {
-            const countriesDiv = document.getElementById('homePage');
-            countries.forEach(country => {
-                const countryDiv = document.createElement('div');
-                countryDiv.innerHTML = `ll
-                ${country.name.common}
-                `;
-                countryDiv.appendChild(countriesDiv);
-            })
-        }
-    }
+async function showCountriesHomePage() {
+     const countries = await getCountriesHomePage();
+     if (countries) {
+        const countriesDiv = document.getElementById('homePage');
+        countries.forEach(country => {
+            const countryDiv = document.createElement('div');
+            countryDiv.innerHTML = `
+            <img class="mb-6 rounded-t-lg" src="${country.flags.svg}">
+            <div class="pl-6 pb-12">
+                <p class="text-lg mb-4"><span class="font-bold">${country.name.common}</span></p>
+                <p class="text-sm"><span class="font-semibold">Population: </span>${country.population}</p>
+                <p class="text-sm"><span class="font-semibold">Region: </span>${country.region}</p>
+                <p class="text-sm"><span class="font-semibold">Capital: </span>${country.capital}</p>
+            </div>
+            `;
+            countryDiv.className = "bg-white my-8 w-[80%] shadow-md rounded-md justify-center";
+            countriesDiv.appendChild(countryDiv);
+        });
+     }
 }
 
-window.onload = getCountriesHomePageView();
+showCountriesHomePage();
