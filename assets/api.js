@@ -5,12 +5,12 @@ document.getElementById('websiteSearch').addEventListener('keyup', e => { // add
     if (e.code === "Enter") {
         let country = document.getElementById('websiteSearch').value;
         currentCountry = country;
-        getCountries(country);        
+        getCountries(country);
         countryPreview(country);
     }
 });
 
-document.getElementById('showPreview').addEventListener('click', function() { // addEventListener click on flag
+document.getElementById('showPreview').addEventListener('click', function () { // addEventListener click on flag
     deleteContent();
     countryCard();
 });
@@ -51,7 +51,7 @@ function countryCard() { // Pour ensuite afficher le contenu entier des données
         </div>
     </div>
     `;
-    document.getElementById('backButton').addEventListener('click', function() {
+    document.getElementById('backButton').addEventListener('click', function () {
         showContent();
     });
 }
@@ -70,7 +70,7 @@ function showContent() { // Vide la div du contenu entier pour recharger la div 
     </div>`;
 }
 
-async function getCountries(country) { // Récupération des informations
+async function getCountries(country) { // Récupération des informations demandées par l'utilisateur
     let url = `https://restcountries.com/v3.1/name/${country}`;
     try {
         const call = await fetch(url);
@@ -119,3 +119,42 @@ async function countryPreview(country) { // Affichage preview des données récu
         </div>`;
     }
 }
+
+let responseHomePage;
+async function getCountriesHomepage() { // Récupération des informations pour la homepage
+    let url = "https://restcountries.com/v3.1/all";
+    try {
+        const call = await fetch(url);
+        const response = await call.json();
+        responseHomePage = response.length;
+
+        if (response) {
+            return response;
+        }
+        else {
+            console.error('Aucune information trouvée pour la ville spécifiée.');
+            return null;
+        }
+    }
+    catch (error) {
+        console.error('Erreur lors de la récupération des données: ', error);
+        return null;
+    }
+}
+
+async function getCountriesHomePageView() { // Affichage des informations pour la homepage
+    const countries = await getCountriesHomepage(); {
+        if (countries) {
+            const countriesDiv = document.getElementById('homePage');
+            countries.forEach(country => {
+                const countryDiv = document.createElement('div');
+                countryDiv.innerHTML = `ll
+                ${country.name.common}
+                `;
+                countryDiv.appendChild(countriesDiv);
+            })
+        }
+    }
+}
+
+window.onload = getCountriesHomePageView();
