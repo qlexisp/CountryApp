@@ -1,19 +1,74 @@
 let showCountriesInfos;
+let currentCountry;
 
 document.getElementById('websiteSearch').addEventListener('keyup', e => { // addEventListener de la search bar
     if (e.code === "Enter") {
         let country = document.getElementById('websiteSearch').value;
-        showCountries(country);
-        getCountries(country);
+        currentCountry = country;
+        getCountries(country);        
+        countryPreview(country);
     }
 });
 
-document.getElementById('showCountries').addEventListener('click', c => { // addEventListener click on flag
-    if (c) {
-        deleteContent();
-        countryCard();
-    }
+document.getElementById('showPreview').addEventListener('click', function() { // addEventListener click on flag
+    deleteContent();
+    countryCard();
 });
+
+function deleteContent() { // Supprime le contenu de la div de la preview des données
+    document.getElementById('showPreview').innerHTML = ``;
+}
+
+function countryCard() { // Pour ensuite afficher le contenu entier des données récupérées
+    document.getElementById('showCountries').innerHTML = `
+    <div class="my-8 flex justify-center w-[85%]">
+        <div class="" id="backButton">
+            <button class="flex mb-10 bg-white py-2 px-4 shadow-md w-[35%]">
+                <img class="mr-2" src="assets/img/arrow_back.png">
+                <p class="">Back</p>
+            </button>
+
+            <img class="" src="${showCountriesInfos.flag}">
+            <div class="mt-8 text-sm">
+                <p class="text-lg font-bold mb-4">${showCountriesInfos.name}</p>
+                <p class=""><span class="font-semibold">Native Name:</span> ${showCountriesInfos.name.nativeName}</p>
+                <p class=""><span class="font-semibold">Population:</span> ${showCountriesInfos.population}</p>
+                <p class=""><span class="font-semibold">Region:</span> ${showCountriesInfos.region}</p>
+                <p class=""><span class="font-semibold">Sub Region:</span> ${showCountriesInfos.subregion}</p>
+                <p class=""><span class="font-semibold">Capital:</span> ${showCountriesInfos.capital}</p>
+            </div>
+
+            <div class="text-sm mt-8">
+                <p class=""><span class="font-semibold">Top Level Domain:</span> ${showCountriesInfos.tld}</p>
+                <p class=""><span class="font-semibold">Currencies:</span> ${showCountriesInfos.currencies}</p>
+                <p class=""><span class="font-semibold">Languages:</span> ${showCountriesInfos.languages}</p>
+            </div>
+
+            <div class="text-base mt-8">
+                <h2 class="font-semibold">Border Countries:</h2>
+                <p class=""></p>
+            </div>
+        </div>
+    </div>
+    `;
+    document.getElementById('backButton').addEventListener('click', function() {
+        showContent();
+    });
+}
+
+function showContent() { // Vide la div du contenu entier pour recharger la div de la preview des données
+    document.getElementById('showCountries').innerHTML = ``;
+    document.getElementById('showPreview').innerHTML = `
+    <div class="bg-white my-8 w-[80%] shadow-md rounded-md">
+        <img class="mb-6 rounded-t-lg" src="${showCountriesInfos.flag}">
+        <div class="pl-6 pb-12">
+            <p class="font-bold text-lg mb-4">${showCountriesInfos.name}</p>
+            <p class="text-sm"><span class="font-semibold">Population:</span> ${showCountriesInfos.population}</p>
+            <p class="text-sm"><span class="font-semibold">Region:</span> ${showCountriesInfos.region}</p>
+            <p class="text-sm"><span class="font-semibold">Capital:</span> ${showCountriesInfos.capital}</p>
+        </div>
+    </div>`;
+}
 
 async function getCountries(country) { // Récupération des informations
     let url = `https://restcountries.com/v3.1/name/${country}`;
@@ -23,7 +78,6 @@ async function getCountries(country) { // Récupération des informations
 
         if (response) {
             const countryInfos = response[0];
-            console.log(countryInfos.borders);
             showCountriesInfos = {
                 flag: countryInfos.flags.svg,
                 name: countryInfos.name.common,
@@ -50,10 +104,10 @@ async function getCountries(country) { // Récupération des informations
     }
 }
 
-async function showCountries(country) { // Affichage des données récupérées
+async function countryPreview(country) { // Affichage preview des données récupérées
     const showCountriesInfos = await getCountries(country);
     if (showCountriesInfos) {
-        document.getElementById('showCountries').innerHTML = `
+        document.getElementById('showPreview').innerHTML = `
         <div class="bg-white my-8 w-[80%] shadow-md rounded-md">
             <img class="mb-6 rounded-t-lg" src="${showCountriesInfos.flag}">
             <div class="pl-6 pb-12">
@@ -64,29 +118,4 @@ async function showCountries(country) { // Affichage des données récupérées
             </div>
         </div>`;
     }
-}
-
-function deleteContent() { // Supprime le contenu de la div "showCountries" en cas d'event
-    document.getElementById('showCountries').innerHTML = ``;
-};
-
-function countryCard() { // Contenu 
-    document.getElementById('showCountries').innerHTML = `
-    <div class"my-20 bg-white shadow-md">
-        <div class="">
-            <img class="" src="assets/img/arrow_back.png">
-            <p class="font-bold">Back</p>
-        </div>
-
-        <img class="" src="${showCountriesInfos.flag}">
-        <div class="">
-            <p class="">${showCountriesInfos.name}</p>
-            <p class="">${showCountriesInfos.name.nativeName}</p>
-            <p class="">${showCountriesInfos.population}</p>
-            <p class="">${showCountriesInfos.region}</p>
-            <p class="">${showCountriesInfos.subregion}</p>
-            <p class="">${showCountriesInfos.capital}</p>
-        </div>
-    </div>
-    `;
 }
