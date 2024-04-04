@@ -2,8 +2,8 @@
 document.getElementById('websiteSearch').addEventListener('keyup', e => { // addEventListener de la search bar
     if (e.code === "Enter") {
         let country = document.getElementById('websiteSearch').value;
-        getCountries(country);
         deleteContenthomePage();
+        getCountries(country);
         countryPreview(country);
     }
     const searchBar = document.getElementById('websiteSearch');
@@ -30,7 +30,6 @@ async function getCountries(country) { // Récupération des informations demand
     let url = `https://restcountries.com/v3.1/name/${country}`;
     
     try {
-        console.log('GETCOUNTRRIES',country)
         const data = await fetch(url);
         const response = await data.json();
 
@@ -39,15 +38,15 @@ async function getCountries(country) { // Récupération des informations demand
             showCountriesInfos = {
                 flag: countryInfos.flags.svg,
                 name: countryInfos.name.common,
-                nativeName: countryInfos.name.nativeName, // pas sûr
+                nativeName: countryInfos.name.nativeName,
                 population: countryInfos.population,
                 region: countryInfos.region,
                 subregion: countryInfos.subregion,
                 capital: countryInfos.capital,
                 tld: countryInfos.tld,
-                currencies: countryInfos.currencies, // pas sûr
+                currencies: countryInfos.currencies,
                 languages: countryInfos.languages,
-                borders: countryInfos.borders // pas sûr
+                borders: countryInfos.borders
             };
             return showCountriesInfos;
         }
@@ -90,9 +89,9 @@ async function countryCard() { // Pour ensuite afficher le contenu entier des do
     
     const rawCountryData = await getCountries(country);
     // const preparedCountryData = await prepareCountryData(rawCountryData);
-    console.log(showCountriesInfos.currencies)
     let currency = Object.keys(showCountriesInfos.currencies)[0];
-    console.log(currency)
+    let languages = Object.keys(showCountriesInfos.languages);
+    let nativeName = Object.values(showCountriesInfos.nativeName)[0].common;
     document.getElementById('showCountries').innerHTML = `
     <div class="my-8 flex-col justify-center w-[85%]">
         <button id="backButton" class="flex mb-10 bg-white py-2 px-4 shadow-md w-[35%]">
@@ -103,7 +102,7 @@ async function countryCard() { // Pour ensuite afficher le contenu entier des do
         <img class="" src="${showCountriesInfos.flag}">
         <div class="mt-8 text-sm">
             <p class="text-lg font-bold mb-4">${showCountriesInfos.name}</p>
-            <p class=""><span class="font-semibold">Native Name:</span> ${showCountriesInfos.name.nativeName}</p>
+            <p class=""><span class="font-semibold">Native Name:</span> ${nativeName}</p>
             <p class=""><span class="font-semibold">Population:</span> ${showCountriesInfos.population}</p>
             <p class=""><span class="font-semibold">Region:</span> ${showCountriesInfos.region}</p>
             <p class=""><span class="font-semibold">Sub Region:</span> ${showCountriesInfos.subregion}</p>
@@ -113,7 +112,7 @@ async function countryCard() { // Pour ensuite afficher le contenu entier des do
         <div class="text-sm mt-8">
             <p class=""><span class="font-semibold">Top Level Domain:</span> ${showCountriesInfos.tld}</p>
             <p class=""><span class="font-semibold">Currencies:</span> ${currency}</p>
-            <p class=""><span class="font-semibold">Languages:</span> ${showCountriesInfos.languages}</p>
+            <p class=""><span class="font-semibold">Languages:</span> ${languages}</p>
         </div>
 
         <div class="text-base mt-8">
@@ -163,7 +162,7 @@ async function getCountriesHomePage() { // Récupération des informations pour 
     }
 }
 
-async function showCountriesHomePage() {
+async function showCountriesHomePage() { // Affichage des informations pour la homePage
      const countries = await getCountriesHomePage();
      if (countries) {
         const countriesDiv = document.getElementById('homePage');
