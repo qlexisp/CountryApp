@@ -13,7 +13,7 @@
 
 <body>
 
-    <header class="flex justify-between items-center py-[10%]"> <!-- header -->
+    <header class="flex justify-between items-center py-[10%] lg:py-[2%]"> <!-- header -->
         <div class="font-bold ml-[5%]"><a href="index.html">Where in the world?</a></div>
         <div class="mr-[5%] flex items-center justify-center">
             <img class="mx-2" alt="Logo du darkmode" src="assets/img/darkmode.png">
@@ -22,40 +22,43 @@
     </header>
 
     <div class="bg-[#FAFAFA] w-full"> <!-- conteneur de page -->
-        <div class="flex justify-center"> <!-- search bar -->
-            <div class="m-[2%] flex my-6 w-full max-w-[90%]">
-                <label for="site-search" class="sr-only">Search for a country</label>
-                <div class="relative flex items-center w-full">
-                    <div class="w-full">
-                        <input type="search" id="websiteSearch" name="websiteSearch"
-                            placeholder="Search for a country..."
-                            class="shadow-md px-10 py-[5%] rounded text-sm w-full">
-                        <img src="assets/img/search.png"
-                            class="absolute left-3 top-[50%] transform -translate-y-1/2 w-4 h-4">
+        <div class="lg: flex justify-between mx-16">
+            <div class="flex justify-center w-[50%]"> <!-- search bar -->
+                <div class="m-[2%] flex my-6 w-full max-w-[90%]">
+                    <label for="site-search" class="sr-only">Search for a country</label>
+                    <div class="relative flex items-center w-full">
+                        <div class="w-full">
+                            <input type="search" id="websiteSearch" name="websiteSearch"
+                                placeholder="Search for a country..."
+                                class="shadow-md px-10 py-[5%] rounded text-sm w-full lg:py-[2%]">
+                            <img src="assets/img/search.png"
+                                class="absolute left-3 top-[50%] transform -translate-y-1/2 w-4 h-4">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="flex flex-col"> <!-- filtre -->
-            <div class="w-[50%] flex bg-white rounded ml-[5%] py-4 pl-6 text-sm items-center shadow-md" id="onClick">
-                <a href="#filter" class="flex">
-                    Filter by Region
-                    <img class="justify-end ml-10" src="assets/img/Arrow.png" alt="Arrow">
-                </a>
+            <div class="flex flex-col"> <!-- filtre -->
+                <div class="w-[50%] flex bg-white rounded ml-[5%] py-4 pl-6 text-sm items-center shadow-md lg: px-28"
+                    id="onClick">
+                    <a href="#filter" class="flex">
+                        Filter by Region
+                        <img class="justify-end ml-10" src="assets/img/Arrow.png" alt="Arrow">
+                    </a>
+                </div>
+
+                <div class="bg-white flex flex-col ml-[5%] mt-[2%] rounded pl-6 py-4 w-[50%] shadow-md hidden"
+                    id="menu">
+                    <a href="#africa" class="text-sm mb-[3%]">Africa</a>
+                    <a href="#america" class="text-sm mb-[3%]">America</a>
+                    <a href="#asia" class="text-sm mb-[3%]">Asia</a>
+                    <a href="#europe" class="text-sm mb-[3%]">Europe</a>
+                    <a href="#ocean" class="text-sm mb-[3%]">Oceania</a>
+                </div>
             </div>
-
-            <div class="bg-white flex flex-col ml-[5%] mt-[2%] rounded pl-6 py-4 w-[50%] shadow-md hidden" id="menu">
-                <a href="#africa" class="text-sm mb-[3%]">Africa</a>
-                <a href="#america" class="text-sm mb-[3%]">America</a>
-                <a href="#asia" class="text-sm mb-[3%]">Asia</a>
-                <a href="#europe" class="text-sm mb-[3%]">Europe</a>
-                <a href="#ocean" class="text-sm mb-[3%]">Oceania</a>
-            </div>
         </div>
-
-        <main class="mb-8"> <!-- main-->
-            <div class="flex flex-col" id="homePage"></div>
+        <main class="pb-8"> <!-- main-->
+            <div class="flex flex-col lg:grid grid-cols-4" id="homePage"></div>
             <div class="flex justify-center" id="showPreview"></div>
             <div class="flex justify-center" id="showCountries"></div>
         </main>
