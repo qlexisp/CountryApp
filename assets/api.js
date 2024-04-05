@@ -2,33 +2,30 @@
 document.getElementById('websiteSearch').addEventListener('keyup', e => { // addEventListener de la search bar
     if (e.code === "Enter") {
         let country = document.getElementById('websiteSearch').value;
-        deleteContenthomePage();
-        getCountries(country);
-        countryPreview(country);
+        clearHomePageContent();
+        fetchCountryData(country);
+        displayCountryPreview(country);
     }
     const searchBar = document.getElementById('websiteSearch');
     const searchTerm = searchBar.value.trim();
     if (searchTerm === '') {
-        showCountriesHomePage();
+        showHomePageCountries();
     }
 });
 
 // addEventListener (affichage recherche)
 document.getElementById('showPreview').addEventListener('click', async function () { // addEventListener click on flag
-    deleteContent();
-    await countryCard();
+    clearPreviewContent();
+    await displayCountryDetails();
 });
 
 // addEventListener (tri)
 
 
-//addEventListener (affichage des cartes de la homePage)
-document.getElementById('')
-
 //// API call (recherche)
-async function getCountries(country) { // Récupération des informations demandées par l'utilisateur
+async function fetchCountryData(country) { // Récupération des informations demandées par l'utilisateur
     let url = `https://restcountries.com/v3.1/name/${country}`;
-    
+
     try {
         const data = await fetch(url);
         const response = await data.json();
@@ -61,9 +58,9 @@ async function getCountries(country) { // Récupération des informations demand
     }
 }
 
-async function countryPreview(country) { // Affichage preview des données récupérées
-    
-    const showCountriesInfos = await getCountries(country);
+async function displayCountryPreview(country) { // Affichage preview des données récupérées
+
+    const showCountriesInfos = await fetchCountryData(country);
     if (showCountriesInfos) {
         document.getElementById('showPreview').innerHTML = `
         <div class="bg-white my-8 w-[80%] shadow-md rounded-md">
@@ -78,16 +75,18 @@ async function countryPreview(country) { // Affichage preview des données récu
     }
 }
 
-//// Fonction retour
-function deleteContent() { // Supprime le contenu de la div de la preview des données
-    document.getElementById('showPreview').innerHTML = ``;  
+//// Fonction retour (recherche)
+function clearPreviewContent() { // Supprime le contenu de la div de la preview des données
+    document.getElementById('showPreview').innerHTML = ``;
 }
 
-async function countryCard() { // Pour ensuite afficher le contenu entier des données récupérées
+//// Fonction retour (homepage)
+
+
+async function displayCountryDetails() { // Pour ensuite afficher le contenu entier des données récupérées
 
     let country = document.getElementById('websiteSearch').value;
-    
-    const rawCountryData = await getCountries(country);
+
     // const preparedCountryData = await prepareCountryData(rawCountryData);
     let currency = Object.keys(showCountriesInfos.currencies)[0];
     let languages = Object.keys(showCountriesInfos.languages);
@@ -142,7 +141,7 @@ function showContent() { // Vide la div du contenu entier pour recharger la div 
 
 // API call (homepage)
 // let responseHomePage;
-async function getCountriesHomePage() { // Récupération des informations pour la homepage
+async function fetchCountriesForHomePage() { // Récupération des informations pour la homepage
     let url = "https://restcountries.com/v3.1/all";
     try {
         const data = await fetch(url);
@@ -162,9 +161,54 @@ async function getCountriesHomePage() { // Récupération des informations pour 
     }
 }
 
-async function showCountriesHomePage() { // Affichage des informations pour la homePage
-     const countries = await getCountriesHomePage();
-     if (countries) {
+async function displayCard (countryPara) {
+    const country = await fetchCountryData(countryPara);
+    console.log(country);
+    let currency = Object.keys(country.currencies)[0];
+    let languages = Object.keys(country.languages);
+    let nativeName = Object.values(country.nativeName)[0].common;
+    document.getElementById('showCountries').innerHTML = `
+    <div class="my-8 flex-col justify-center w-[85%]">
+        <button id="backButton" class="flex mb-10 bg-white py-2 px-4 shadow-md w-[35%]">
+            <img class="mr-2" src="assets/img/arrow_back.png">
+            <span class="">Back</span>
+        </button>
+
+        <img class="" src="${country.flag}">
+        <div class="mt-8 text-sm">
+            <p class="text-lg font-bold mb-4">${country.name}</p>
+            <p class=""><span class="font-semibold">Native Name:</span> ${nativeName}</p>
+            <p class=""><span class="font-semibold">Population:</span> ${country.population}</p>
+            <p class=""><span class="font-semibold">Region:</span> ${country.region}</p>
+            <p class=""><span class="font-semibold">Sub Region:</span> ${country.subregion}</p>
+            <p class=""><span class="font-semibold">Capital:</span> ${country.capital}</p>
+        </div>
+
+        <div class="text-sm mt-8">
+            <p class=""><span class="font-semibold">Top Level Domain:</span> ${country.tld}</p>
+            <p class=""><span class="font-semibold">Currencies:</span> ${currency}</p>
+            <p class=""><span class="font-semibold">Languages:</span> ${languages}</p>
+        </div>
+
+        <div class="text-base mt-8">
+            <h2 class="font-semibold">Border Countries:</h2>
+            <p class=""></p>
+        </div>
+    </div>
+    `;
+    document.getElementById('backButton').addEventListener('click', function () {
+        deleteDisplayCard();
+        showHomePageCountries();
+    });
+}
+
+function deleteDisplayCard () {
+    document.getElementById('showCountries').innerHTML = ``;
+}
+
+async function showHomePageCountries() { // Affichage des informations pour la homePage
+    const countries = await fetchCountriesForHomePage();
+    if (countries) {
         const countriesDiv = document.getElementById('homePage');
         countries.forEach(country => {
             const countryDiv = document.createElement('div');
@@ -178,14 +222,21 @@ async function showCountriesHomePage() { // Affichage des informations pour la h
             </div>
             `;
             countryDiv.className = "bg-white my-8 w-[80%] shadow-md rounded-md justify-center mx-auto";
+            countryDiv.id = country.name.common;
             countriesDiv.appendChild(countryDiv);
+
+            //addEventListener (affichage des cartes de la homePage)
+            countryDiv.addEventListener('click', async function (e) {
+                clearHomePageContent();
+                displayCard(country.name.common);
+            });
         });
     }
 }
 
-showCountriesHomePage();
+showHomePageCountries();
 
 // Fonction permettant de supprimer les pays de la homepage en cas de recherche
-function deleteContenthomePage(){
+function clearHomePageContent() {
     document.getElementById('homePage').innerHTML = ``;
 }
