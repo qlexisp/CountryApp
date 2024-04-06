@@ -91,6 +91,11 @@ async function displayCountryDetails() { // Pour ensuite afficher le contenu ent
     let currency = Object.keys(showCountriesInfos.currencies)[0];
     let languages = Object.keys(showCountriesInfos.languages);
     let nativeName = Object.values(showCountriesInfos.nativeName)[0].common;
+    let borders = Object.values(showCountriesInfos.borders).join(", ");
+    let borderCountriesHtml = "";
+    showCountriesInfos.borders.forEach(border => {
+        borderCountriesHtml += `<p class="shadow-md rounded px-4 py-1 mr-2">${border}</p>`;
+    });
     document.getElementById('showCountries').innerHTML = `
     <div class="my-8 flex-col justify-center w-[85%]">
         <button id="backButton" class="flex mb-10 bg-white py-2 px-4 shadow-md w-[35%]">
@@ -114,9 +119,9 @@ async function displayCountryDetails() { // Pour ensuite afficher le contenu ent
             <p class=""><span class="font-semibold">Languages:</span> ${languages}</p>
         </div>
 
-        <div class="text-base mt-8">
-            <h2 class="font-semibold">Border Countries:</h2>
-            <p class=""></p>
+        <div class="text-base mt-8 flex items-center">
+            <h2 class="font-semibold mr-4">Border Countries:</h2>
+            <p class="flex">${borderCountriesHtml}</p>
         </div>
     </div>
     `;
@@ -161,7 +166,7 @@ async function fetchCountriesForHomePage() { // Récupération des informations 
     }
 }
 
-async function displayCard (countryPara) {
+async function displayCard(countryPara) {
     const country = await fetchCountryData(countryPara);
     console.log(country);
     let currency = Object.keys(country.currencies)[0];
@@ -202,7 +207,7 @@ async function displayCard (countryPara) {
     });
 }
 
-function deleteDisplayCard () {
+function deleteDisplayCard() {
     document.getElementById('showCountries').innerHTML = ``;
 }
 
@@ -221,7 +226,7 @@ async function showHomePageCountries() { // Affichage des informations pour la h
                 <p class="text-sm"><span class="font-semibold">Capital: </span>${country.capital}</p>
             </div>
             `;
-            countryDiv.className = "bg-white mb-20 w-[80%] mx-auto shadow-md rounded-md justify-center lg:w-[100%]";
+            countryDiv.className = "bg-white mb-20 w-[80%] mx-auto shadow-md rounded-md justify-center lg:w-[100%] lg:mb-0";
             countryDiv.id = country.name.common;
             countriesDiv.appendChild(countryDiv);
 
