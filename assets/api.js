@@ -221,7 +221,7 @@ async function showHomePageCountries() { // Affichage des informations pour la h
                 <p class="text-sm"><span class="font-semibold">Capital: </span>${country.capital}</p>
             </div>
             `;
-            countryDiv.className = "bg-white mb-20 w-[80%] shadow-md rounded-md justify-center mx-auto";
+            countryDiv.className = "bg-white mb-20 w-[80%] mx-auto shadow-md rounded-md justify-center lg:w-[100%]";
             countryDiv.id = country.name.common;
             countriesDiv.appendChild(countryDiv);
 
