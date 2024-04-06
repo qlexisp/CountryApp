@@ -22,9 +22,9 @@
     </header>
 
     <div class="bg-[#FAFAFA] w-full"> <!-- conteneur de page -->
-        <div class="lg: flex justify-between mx-16">
-            <div class="flex justify-center w-[50%]"> <!-- search bar -->
-                <div class="m-[2%] flex my-6 w-full max-w-[90%]">
+        <div class="py-8 lg:flex justify-between lg:mx-28 lg:items-center">
+            <div class="flex justify-center lg:w-[50%] lg:justify-start"> <!-- search bar -->
+                <div class="flex my-6 w-full max-w-[90%]">
                     <label for="site-search" class="sr-only">Search for a country</label>
                     <div class="relative flex items-center w-full">
                         <div class="w-full">
@@ -38,12 +38,12 @@
                 </div>
             </div>
 
-            <div class="flex flex-col"> <!-- filtre -->
-                <div class="w-[50%] flex bg-white rounded ml-[5%] py-4 pl-6 text-sm items-center shadow-md lg: px-28"
+            <div class="flex flex-col lg:items-center"> <!-- filtre -->
+                <div class="w-[50%] lg:w-[auto] flex bg-white rounded py-4 pl-6 text-sm items-center shadow-md lg:px-6"
                     id="onClick">
-                    <a href="#filter" class="flex">
-                        Filter by Region
-                        <img class="justify-end ml-10" src="assets/img/Arrow.png" alt="Arrow">
+                    <a href="#filter" class="flex items-center">
+                        <span class="lg:inline-block">Filter by Region</span>
+                        <img class="justify-end ml-4 lg:ml-2" src="assets/img/Arrow.png" alt="Arrow">
                     </a>
                 </div>
 
@@ -58,7 +58,7 @@
             </div>
         </div>
         <main class="pb-8"> <!-- main-->
-            <div class="flex flex-col lg:grid grid-cols-4" id="homePage"></div>
+            <div class="flex flex-col lg:grid grid-cols-4 lg:mx-16" id="homePage"></div>
             <div class="flex justify-center" id="showPreview"></div>
             <div class="flex justify-center" id="showCountries"></div>
         </main>
