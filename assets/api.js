@@ -10,6 +10,7 @@ document.getElementById('websiteSearch').addEventListener('keyup', e => { // add
     const searchTerm = searchBar.value.trim();
     if (searchTerm === '') {
         showHomePageCountries();
+        clearPreviewContent();
     }
 });
 
@@ -101,31 +102,38 @@ async function displayCountryDetails() { // Pour ensuite afficher le contenu ent
     }
 
     document.getElementById('showCountries').innerHTML = `
-    <div class="my-8 flex-col justify-center w-[85%]">
-        <button id="backButton" class="flex mb-10 bg-white py-2 px-4 shadow-md w-[35%]">
+    <div class="my-8 flex-col justify-center lg:flex-row w-[85%]">
+        <button id="backButton" class="flex mb-10 bg-white py-2 px-4 shadow-md w-[35%] lg:w-[8%]">
             <img class="mr-2" src="assets/img/arrow_back.png">
             <span class="">Back</span>
         </button>
 
+        <div class="lg:flex w-[65%]">
+        <div class="mr-[8%]">
         <img class="" src="${showCountriesInfos.flag}">
-        <div class="mt-8 text-sm">
-            <p class="text-lg font-bold mb-4">${showCountriesInfos.name}</p>
-            <p class=""><span class="font-semibold">Native Name:</span> ${nativeName}</p>
-            <p class=""><span class="font-semibold">Population:</span> ${showCountriesInfos.population}</p>
-            <p class=""><span class="font-semibold">Region:</span> ${showCountriesInfos.region}</p>
-            <p class=""><span class="font-semibold">Sub Region:</span> ${showCountriesInfos.subregion}</p>
-            <p class=""><span class="font-semibold">Capital:</span> ${showCountriesInfos.capital}</p>
         </div>
+        <div class="">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-16">
+                <div class="mt-8 text-sm lg:mt-4">
+                    <p class="text-lg font-bold mb-4">${showCountriesInfos.name}</p>
+                    <p class=""><span class="font-semibold">Native Name:</span> ${nativeName}</p>
+                    <p class=""><span class="font-semibold">Population:</span> ${showCountriesInfos.population}</p>
+                    <p class=""><span class="font-semibold">Region:</span> ${showCountriesInfos.region}</p>
+                    <p class=""><span class="font-semibold">Sub Region:</span> ${showCountriesInfos.subregion}</p>
+                    <p class=""><span class="font-semibold">Capital:</span> ${showCountriesInfos.capital}</p>
+                </div>
 
-        <div class="text-sm mt-8">
-            <p class=""><span class="font-semibold">Top Level Domain:</span> ${showCountriesInfos.tld}</p>
-            <p class=""><span class="font-semibold">Currencies:</span> ${currency}</p>
-            <p class=""><span class="font-semibold">Languages:</span> ${languages}</p>
-        </div>
+            <div class="text-sm mt-8 lg:grid lg:place-items-center">
+                <p class=""><span class="font-semibold">Top Level Domain:</span> ${showCountriesInfos.tld}</p>
+                <p class=""><span class="font-semibold">Currencies:</span> ${currency}</p>
+                <p class=""><span class="font-semibold">Languages:</span> ${languages}</p>
+                </div>
+            </div>
 
-        <div class="text-base mt-8 flex items-center">
+            <div class="text-base mt-8 flex items-center">
             <h2 class="font-semibold mr-4">Border Countries:</h2>
             <p class="flex">${borderCountriesHtml}</p>
+            </div>
         </div>
     </div>
     `;
@@ -185,19 +193,19 @@ async function displayCard(countryPara) {
         borderCountriesHtml = `<p class="text-sm">No bordering countries</p>`;
     }
     document.getElementById('showCountries').innerHTML = `
-    <div class="my-8 flex-col justify-center w-[85%]">
-        <button id="backButton" class="flex mb-10 bg-white py-2 px-4 shadow-md w-[35%]">
+    <div class="my-8 flex-col justify-center lg:flex-row w-[85%]">
+        <button id="backButton" class="flex mb-10 bg-white py-2 px-4 shadow-md w-[35%] lg:w-[8%]">
             <img class="mr-2" src="assets/img/arrow_back.png">
             <span class="">Back</span>
         </button>
         
-        <div class="lg:flex">
-            <div class="">
-                <img class="w-[65%]" src="${country.flag}">
+        <div class="lg:flex w-[65%]">
+            <div class="mr-[8%]">
+                <img class="" src="${country.flag}">
             </div>
             <div class="">
                 <div class="lg:grid lg:grid-cols-2 lg:gap-16">
-                    <div class="mt-8 text-sm">
+                    <div class="mt-8 text-sm lg:mt-4">
                         <p class="text-lg font-bold mb-4">${country.name}</p>
                         <p class=""><span class="font-semibold">Native Name:</span> ${nativeName}</p>
                         <p class=""><span class="font-semibold">Population:</span> ${country.population}</p>
