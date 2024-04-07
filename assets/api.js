@@ -87,15 +87,19 @@ async function displayCountryDetails() { // Pour ensuite afficher le contenu ent
 
     let country = document.getElementById('websiteSearch').value;
 
-    // const preparedCountryData = await prepareCountryData(rawCountryData);
-    let currency = Object.keys(showCountriesInfos.currencies)[0];
-    let languages = Object.keys(showCountriesInfos.languages);
-    let nativeName = Object.values(showCountriesInfos.nativeName)[0].common;
-    let borders = Object.values(showCountriesInfos.borders).join(", ");
+    let currency = showCountriesInfos.currencies ? Object.keys(showCountriesInfos.currencies)[0] : "Not specified";
+    let languages = showCountriesInfos.languages ? Object.keys(showCountriesInfos.languages) : ["Not specified"];
+    let nativeName = showCountriesInfos.nativeName ? Object.values(showCountriesInfos.nativeName)[0].common : "Not specified";
+    let borders = showCountriesInfos.borders ? Object.values(showCountriesInfos.borders).join(", ") : "None";
     let borderCountriesHtml = "";
-    showCountriesInfos.borders.forEach(border => {
-        borderCountriesHtml += `<p class="shadow-md rounded px-4 py-1 mr-2">${border}</p>`;
-    });
+    if (Array.isArray(showCountriesInfos.borders) && showCountriesInfos.borders.length > 0) {
+        showCountriesInfos.borders.forEach(border => {
+            borderCountriesHtml += `<p class="shadow-md rounded px-4 py-1 mr-2">${border}</p>`;
+        });
+    } else {
+        borderCountriesHtml = `<p class="text-sm">No bordering countries</p>`;
+    }
+
     document.getElementById('showCountries').innerHTML = `
     <div class="my-8 flex-col justify-center w-[85%]">
         <button id="backButton" class="flex mb-10 bg-white py-2 px-4 shadow-md w-[35%]">
@@ -168,36 +172,52 @@ async function fetchCountriesForHomePage() { // Récupération des informations 
 
 async function displayCard(countryPara) {
     const country = await fetchCountryData(countryPara);
-    console.log(country);
-    let currency = Object.keys(country.currencies)[0];
-    let languages = Object.keys(country.languages);
-    let nativeName = Object.values(country.nativeName)[0].common;
+    let currency = country.currencies ? Object.keys(country.currencies)[0] : "Not specified";
+    let languages = country.languages ? Object.keys(country.languages) : ["Not specified"];
+    let nativeName = country.nativeName ? Object.values(country.nativeName)[0].common : "Not specified";
+    let borders = country.borders ? Object.values(country.borders).join(", ") : "None";
+    let borderCountriesHtml = "";
+    if (Array.isArray(country.borders) && country.borders.length > 0) {
+        country.borders.forEach(border => {
+            borderCountriesHtml += `<p class="shadow-md rounded px-4 py-1 mr-2">${border}</p>`;
+        });
+    } else {
+        borderCountriesHtml = `<p class="text-sm">No bordering countries</p>`;
+    }
     document.getElementById('showCountries').innerHTML = `
     <div class="my-8 flex-col justify-center w-[85%]">
         <button id="backButton" class="flex mb-10 bg-white py-2 px-4 shadow-md w-[35%]">
             <img class="mr-2" src="assets/img/arrow_back.png">
             <span class="">Back</span>
         </button>
+        
+        <div class="lg:flex">
+            <div class="">
+                <img class="w-[65%]" src="${country.flag}">
+            </div>
+            <div class="">
+                <div class="lg:grid lg:grid-cols-2 lg:gap-16">
+                    <div class="mt-8 text-sm">
+                        <p class="text-lg font-bold mb-4">${country.name}</p>
+                        <p class=""><span class="font-semibold">Native Name:</span> ${nativeName}</p>
+                        <p class=""><span class="font-semibold">Population:</span> ${country.population}</p>
+                        <p class=""><span class="font-semibold">Region:</span> ${country.region}</p>
+                        <p class=""><span class="font-semibold">Sub Region:</span> ${country.subregion}</p>
+                        <p class=""><span class="font-semibold">Capital:</span> ${country.capital}</p>
+                    </div>
 
-        <img class="" src="${country.flag}">
-        <div class="mt-8 text-sm">
-            <p class="text-lg font-bold mb-4">${country.name}</p>
-            <p class=""><span class="font-semibold">Native Name:</span> ${nativeName}</p>
-            <p class=""><span class="font-semibold">Population:</span> ${country.population}</p>
-            <p class=""><span class="font-semibold">Region:</span> ${country.region}</p>
-            <p class=""><span class="font-semibold">Sub Region:</span> ${country.subregion}</p>
-            <p class=""><span class="font-semibold">Capital:</span> ${country.capital}</p>
-        </div>
-
-        <div class="text-sm mt-8">
-            <p class=""><span class="font-semibold">Top Level Domain:</span> ${country.tld}</p>
-            <p class=""><span class="font-semibold">Currencies:</span> ${currency}</p>
-            <p class=""><span class="font-semibold">Languages:</span> ${languages}</p>
-        </div>
-
-        <div class="text-base mt-8">
-            <h2 class="font-semibold">Border Countries:</h2>
-            <p class=""></p>
+                    <div class="text-sm mt-8 lg:grid lg:place-items-center">
+                        <p class=""><span class="font-semibold">Top Level Domain:</span> ${country.tld}</p>
+                        <p class=""><span class="font-semibold">Currencies:</span> ${currency}</p>
+                        <p class=""><span class="font-semibold">Languages:</span> ${languages}</p>
+                    </div>
+                </div>
+                
+                    <div class="text-base mt-8 flex items-center">
+                        <h2 class="font-semibold mr-4">Border Countries:</h2>
+                        <p class="flex">${borderCountriesHtml}</p>
+                    </div>
+            </div>
         </div>
     </div>
     `;
