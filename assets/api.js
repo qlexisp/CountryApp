@@ -11,6 +11,7 @@ document.getElementById('websiteSearch').addEventListener('keyup', e => { // add
     if (searchTerm === '') {
         showHomePageCountries();
         clearPreviewContent();
+        deleteDisplayCard();
     }
 });
 
@@ -64,7 +65,7 @@ async function displayCountryPreview(country) { // Affichage preview des donnée
     const showCountriesInfos = await fetchCountryData(country);
     if (showCountriesInfos) {
         document.getElementById('showPreview').innerHTML = `
-        <div class="bg-white my-8 w-[80%] shadow-md rounded-md">
+        <div class="bg-white my-8 w-[80%] shadow-md rounded-md cursor-pointer">
             <img class="mb-6 rounded-t-lg" src="${showCountriesInfos.flag}">
             <div class="pl-6 pb-12">
                 <p class="font-bold text-lg mb-4">${showCountriesInfos.name}</p>
@@ -145,7 +146,7 @@ async function displayCountryDetails() { // Pour ensuite afficher le contenu ent
 function showContent() { // Vide la div du contenu entier pour recharger la div de la preview des données
     document.getElementById('showCountries').innerHTML = ``;
     document.getElementById('showPreview').innerHTML = `
-    <div class="bg-white my-8 w-[80%] shadow-md rounded-md">
+    <div class="bg-white my-8 w-[80%] shadow-md rounded-md cursor-pointer">
         <img class="mb-6 rounded-t-lg" src="${showCountriesInfos.flag}">
         <div class="pl-6 pb-12">
             <p class="font-bold text-lg mb-4">${showCountriesInfos.name}</p>
@@ -254,7 +255,7 @@ async function showHomePageCountries() { // Affichage des informations pour la h
                 <p class="text-sm"><span class="font-semibold">Capital: </span>${country.capital}</p>
             </div>
             `;
-            countryDiv.className = "bg-white mb-20 w-[80%] mx-auto shadow-md rounded-md justify-center lg:w-[100%] lg:mb-0";
+            countryDiv.className = "bg-white mb-20 w-[80%] mx-auto shadow-md rounded-md justify-center cursor-pointer lg:w-[100%] lg:mb-0";
             countryDiv.id = country.name.common;
             countriesDiv.appendChild(countryDiv);
 

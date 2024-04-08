@@ -9,13 +9,14 @@
 
     <script defer src="assets/toggle.js"></script>
     <script defer src="assets/api.js"></script>
+    <script defer src="assets/darkmode.js"></script>
 </head>
 
 <body>
 
-    <header class="flex justify-between items-center py-[10%] lg:py-[2%]"> <!-- header -->
+    <header class="bg-red-500 flex justify-between items-center dark:bg-[#2B3743] py-[10%] lg:py-[2%] "> <!-- header -->
         <div class="font-bold ml-16"><a href="index.html">Where in the world?</a></div>
-        <div class="mr-16 flex items-center justify-center">
+        <div class="mr-16 flex items-center justify-center cursor-pointer" id="toggleDarkmode">
             <img class="mx-2" alt="Logo du darkmode" src="assets/img/darkmode.png">
             <h1 class="font-semibold text-sm">Dark Mode</h1>
         </div>
