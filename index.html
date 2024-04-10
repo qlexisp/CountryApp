@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
     <title>Country App</title>
 
     <script defer src="assets/toggle.js"></script>
@@ -14,15 +19,15 @@
 
 <body>
 
-    <header class="bg-red-500 flex justify-between items-center dark:bg-[#2B3743] py-[10%] lg:py-[2%] "> <!-- header -->
-        <div class="font-bold ml-16"><a href="index.html">Where in the world?</a></div>
+    <header class="bg-white flex justify-between items-center dark:bg-[#2B3743] py-[10%] lg:py-[2%] "> <!-- header -->
+        <div class="font-bold ml-16 dark:text-white"><a href="index.html">Where in the world?</a></div>
         <div class="mr-16 flex items-center justify-center cursor-pointer" id="toggleDarkmode">
             <img class="mx-2" alt="Logo du darkmode" src="assets/img/darkmode.png">
-            <h1 class="font-semibold text-sm">Dark Mode</h1>
+            <h1 class="font-semibold text-sm dark:text-white">Dark Mode</h1>
         </div>
     </header>
 
-    <div class="bg-[#FAFAFA] w-full"> <!-- conteneur de page -->
+    <div class="bg-[#FAFAFA] w-full dark:bg-[#212E37]"> <!-- conteneur de page -->
         <div class="py-8 lg:flex justify-between lg:mx-16 lg:items-center">
             <div class="flex justify-center lg:w-[40%] lg:justify-start"> <!-- search bar -->
                 <div class="flex my-6 w-full max-w-[90%]">
@@ -31,7 +36,7 @@
                         <div class="w-full">
                             <input type="search" id="websiteSearch" name="websiteSearch"
                                 placeholder="Search for a country..."
-                                class="shadow-md px-10 py-[5%] rounded text-sm w-full lg:py-[2%]">
+                                class="shadow-md px-10 py-[5%] rounded text-sm w-full lg:py-[2%] dark:bg-[#2B3743] dark:text-white">
                             <img src="assets/img/search.png"
                                 class="absolute left-3 top-[50%] transform -translate-y-1/2 w-4 h-4">
                         </div>
@@ -40,7 +45,7 @@
             </div>
 
             <div class="flex flex-col lg:items-center"> <!-- filtre -->
-                <div class="w-[50%] lg:w-[auto] flex bg-white rounded py-3 pl-6 text-sm items-center shadow-md lg:px-6"
+                <div class="w-[50%] lg:w-[auto] flex bg-white rounded py-3 pl-6 text-sm items-center shadow-md lg:px-6 dark:bg-[#2B3743] dark:text-white"
                     id="onClick">
                     <a href="#filter" class="flex items-center">
                         <span class="lg:inline-block">Filter by Region</span>
@@ -48,7 +53,7 @@
                     </a>
                 </div>
 
-                <div class="bg-white flex flex-col ml-[5%] mt-[2%] rounded pl-6 py-4 w-[50%] shadow-md hidden"
+                <div class="bg-white flex flex-col ml-[5%] mt-[2%] rounded pl-6 py-4 w-[50%] shadow-md hidden dark:bg-[#2B3743] dark:text-white"
                     id="menu">
                     <a href="#africa" class="text-sm mb-[3%]">Africa</a>
                     <a href="#america" class="text-sm mb-[3%]">America</a>

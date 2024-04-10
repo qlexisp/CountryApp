@@ -65,7 +65,7 @@ async function displayCountryPreview(country) { // Affichage preview des donnée
     const showCountriesInfos = await fetchCountryData(country);
     if (showCountriesInfos) {
         document.getElementById('showPreview').innerHTML = `
-        <div class="bg-white my-8 w-[80%] shadow-md rounded-md cursor-pointer">
+        <div class="bg-white my-8 w-[80%] shadow-md rounded-md cursor-pointer dark:bg-[#2B3743] dark:text-white">
             <img class="mb-6 rounded-t-lg" src="${showCountriesInfos.flag}">
             <div class="pl-6 pb-12">
                 <p class="font-bold text-lg mb-4">${showCountriesInfos.name}</p>
@@ -104,9 +104,9 @@ async function displayCountryDetails() { // Pour ensuite afficher le contenu ent
 
     document.getElementById('showCountries').innerHTML = `
     <div class="my-8 flex-col justify-center lg:flex-row w-[85%]">
-        <button id="backButton" class="flex mb-10 bg-white py-2 px-4 shadow-md w-[35%] lg:w-[8%]">
+        <button id="backButton" class="flex mb-10 bg-white py-2 px-4 shadow-md w-[35%] lg:w-[8%] dark:bg-[#2B3743]">
             <img class="mr-2" src="assets/img/arrow_back.png">
-            <span class="">Back</span>
+            <span class="dark:text-white">Back</span>
         </button>
 
         <div class="lg:flex w-[65%]">
@@ -114,7 +114,7 @@ async function displayCountryDetails() { // Pour ensuite afficher le contenu ent
         <img class="" src="${showCountriesInfos.flag}">
         </div>
         <div class="">
-            <div class="lg:grid lg:grid-cols-2 lg:gap-16">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-16 dark:text-white">
                 <div class="mt-8 text-sm lg:mt-4">
                     <p class="text-lg font-bold mb-4">${showCountriesInfos.name}</p>
                     <p class=""><span class="font-semibold">Native Name:</span> ${nativeName}</p>
@@ -124,14 +124,14 @@ async function displayCountryDetails() { // Pour ensuite afficher le contenu ent
                     <p class=""><span class="font-semibold">Capital:</span> ${showCountriesInfos.capital}</p>
                 </div>
 
-            <div class="text-sm mt-8 lg:grid lg:place-items-center">
+            <div class="text-sm mt-8 lg:grid lg:place-items-center dark:text-white">
                 <p class=""><span class="font-semibold">Top Level Domain:</span> ${showCountriesInfos.tld}</p>
                 <p class=""><span class="font-semibold">Currencies:</span> ${currency}</p>
                 <p class=""><span class="font-semibold">Languages:</span> ${languages}</p>
                 </div>
             </div>
 
-            <div class="text-base mt-8 flex items-center">
+            <div class="text-base mt-8 flex items-center dark:text-white">
             <h2 class="font-semibold mr-4">Border Countries:</h2>
             <p class="flex">${borderCountriesHtml}</p>
             </div>
@@ -146,7 +146,7 @@ async function displayCountryDetails() { // Pour ensuite afficher le contenu ent
 function showContent() { // Vide la div du contenu entier pour recharger la div de la preview des données
     document.getElementById('showCountries').innerHTML = ``;
     document.getElementById('showPreview').innerHTML = `
-    <div class="bg-white my-8 w-[80%] shadow-md rounded-md cursor-pointer">
+    <div class="bg-white my-8 w-[80%] shadow-md rounded-md cursor-pointer dark:bg-[#2B3743] dark:text-white">
         <img class="mb-6 rounded-t-lg" src="${showCountriesInfos.flag}">
         <div class="pl-6 pb-12">
             <p class="font-bold text-lg mb-4">${showCountriesInfos.name}</p>
@@ -195,12 +195,12 @@ async function displayCard(countryPara) {
     }
     document.getElementById('showCountries').innerHTML = `
     <div class="my-8 flex-col justify-center lg:flex-row w-[85%]">
-        <button id="backButton" class="flex mb-10 bg-white py-2 px-4 shadow-md w-[35%] lg:w-[8%]">
+        <button id="backButton" class="flex mb-10 bg-white py-2 px-4 shadow-md w-[35%] lg:w-[8%] dark:bg-[#2B3743] dark:text-white">
             <img class="mr-2" src="assets/img/arrow_back.png">
             <span class="">Back</span>
         </button>
         
-        <div class="lg:flex w-[65%]">
+        <div class="lg:flex w-[65%] dark:text-white">
             <div class="mr-[8%]">
                 <img class="" src="${country.flag}">
             </div>
@@ -255,7 +255,7 @@ async function showHomePageCountries() { // Affichage des informations pour la h
                 <p class="text-sm"><span class="font-semibold">Capital: </span>${country.capital}</p>
             </div>
             `;
-            countryDiv.className = "bg-white mb-20 w-[80%] mx-auto shadow-md rounded-md justify-center cursor-pointer lg:w-[100%] lg:mb-0";
+            countryDiv.className = "bg-white mb-20 w-[80%] mx-auto shadow-md rounded-md justify-center cursor-pointer lg:w-[100%] lg:mb-0 dark:bg-[#2B3743] dark:text-white";
             countryDiv.id = country.name.common;
             countriesDiv.appendChild(countryDiv);
 
