@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const prefersDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const prefersDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
 
     function enableDarkMode() {
         document.documentElement.classList.add('dark');
