@@ -20,18 +20,18 @@
 <body class="">
 
     <header class="bg-white flex justify-between items-center dark:bg-[#2B3743] py-[10%] lg:py-[2%] "> <!-- header -->
-        <div class="font-bold ml-16 dark:text-white"><a href="index.html">Where in the world?</a></div>
-        <div class="mr-16 flex items-center justify-center cursor-pointer" id="toggleDarkmode">
+        <h1 class="font-bold ml-16 dark:text-white"><a href="index.html">Where in the world?</a></h1>
+        <button class="mr-16 flex items-center justify-center cursor-pointer" id="toggleDarkmode">
             <img class="mx-2" alt="Logo du darkmode" src="assets/img/darkmode.png">
-            <h1 class="font-semibold text-sm dark:text-white">Dark Mode</h1>
-        </div>
+            <span class="font-semibold text-sm dark:text-white">Dark Mode</span>
+        </button>
     </header>
 
-    <div class="bg-[#FAFAFA] w-full dark:bg-[#212E37]"> <!-- conteneur de page -->
+    <div class="bg-[#FAFAFA] w-full px-8 dark:bg-[#212E37]"> <!-- conteneur de page -->
         <div class="py-8 lg:flex justify-between lg:mx-16 lg:items-center">
             <div class="flex justify-center lg:w-[40%] lg:justify-start"> <!-- search bar -->
-                <div class="flex my-6 w-full max-w-[90%]">
-                    <label for="site-search" class="sr-only">Search for a country</label>
+                <div class="flex my-6 w-full">
+                    <label for="websiteSearch" class="sr-only">Search for a country</label>
                     <div class="relative flex items-center w-full">
                         <div class="w-full">
                             <input type="search" id="websiteSearch" name="websiteSearch"
@@ -44,16 +44,16 @@
                 </div>
             </div>
 
-            <div class="flex flex-col lg:items-center"> <!-- filtre -->
-                <div class="w-[50%] lg:w-[auto] flex bg-white rounded py-3 pl-6 text-sm items-center shadow-md lg:px-6 dark:bg-[#2B3743] dark:text-white"
+            <div class="relative inline-flex flex-col lg:items-center"> <!-- filtre -->
+                <div class="flex bg-white rounded py-3 pl-6 text-sm items-center shadow-md lg:px-6 dark:bg-[#2B3743] dark:text-white"
                     id="onClick">
-                    <a href="#filter" class="flex items-center">
+                    <a href="#filter" class="inline-flex items-center">
                         <span class="lg:inline-block">Filter by Region</span>
-                        <img class="justify-end ml-4 lg:ml-2" src="assets/img/Arrow.png" alt="Arrow">
+                        <img class="justify-end ml-8 lg:ml-2" src="assets/img/Arrow.png" alt="Arrow">
                     </a>
                 </div>
 
-                <div class="bg-white flex flex-col ml-[5%] mt-[2%] rounded pl-6 py-4 w-[50%] shadow-md hidden dark:bg-[#2B3743] dark:text-white"
+                <div class="bg-white absolute flex flex-col top-[50px] rounded pl-6 py-4 w-full shadow-md hidden dark:bg-[#2B3743] dark:text-white"
                     id="menu">
                     <a href="#africa" class="text-sm mb-[3%]">Africa</a>
                     <a href="#america" class="text-sm mb-[3%]">America</a>
@@ -66,7 +66,7 @@
         <main class="pb-8"> <!-- main-->
             <div class="flex flex-col lg:grid lg:grid-cols-4 lg:gap-12 lg:mx-16" id="homePage"></div>
             <div class="flex justify-center lg:grid lg:grid-cols-4 lg:gap-12 lg:mx-16" id="showPreview"></div>
-            <div class="flex justify-center" id="showCountries"></div>
+            <div class="flex justify-center w-full" id="showCountries"></div>
         </main>
 
     </div>
