@@ -1,3 +1,5 @@
+Mise à jour 10/06/24: Il semble que l'API Rest Countries soit actuellement inaccessible, ce qui empêche le site de récupérer les données nécessaires pour s'afficher correctement.
+
 # CountryApp 🌍
 
 Bienvenue sur **CountryApp** ! C'est une application web conçue pour fournir des informations sur les pays du monde entier. Vous pouvez rechercher des pays spécifiques, consulter leurs détails et explorer différentes régions.
@@ -18,3 +20,7 @@ Pour utiliser **CountryApp** :
 
 ## Remarque
 **CountryApp** est encore en cours de développement. Je travaille continuellement à améliorer ses fonctionnalités et son expérience utilisateur, notamment la fonction de filtrage et un autocomplete pour la fonction de recherche.
+
+## Captures d'écran
+![Version desktop](https://i.ibb.co/BGNt65P/countryappp.png)
+![Version mobile](https://i.ibb.co/NN6wYbp/countryapp.png)
